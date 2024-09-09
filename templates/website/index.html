@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="" x-data="window.homepageData">
+  <section class="hero is-success is-halfheight">
+    <div class="hero-body">
+      <div class="">
+        <h1 class="title">Half height title</h1>
+        <p class="subtitle">Half height subtitle</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script defer type="module">
+  import homepage from "{% static 'js/website/homepage.js' %}";
+  function homepageData() {
+    return homepage;
+  };
+  window.homepageData = homepageData();
+</script>
+{% endblock %}

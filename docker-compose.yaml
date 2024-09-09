@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:16
+    container_name: saas_db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "127.0.0.1:5432:5432"
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app
+  web:
+    build: .
+    container_name: saas_app
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    networks:
+      - app
+
+volumes:
+  pgdata:
+
+
+networks:
+  app:
+    driver: bridge

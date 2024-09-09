@@ -1,0 +1,11 @@
+.my-toggle-content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.my-toggle-content.active {
+  max-height: 1000px;
+  opacity: 1;
+}
